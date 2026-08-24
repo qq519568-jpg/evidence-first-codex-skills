@@ -11,7 +11,7 @@ jobs:
   validate:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Validate structure and privacy guards
-        shell: powershell
-        run: powershell -ExecutionPolicy Bypass -File scripts/validate_repository.ps1
+        shell: pwsh
+        run: ./scripts/validate_repository.ps1
