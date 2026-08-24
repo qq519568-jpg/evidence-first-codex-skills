@@ -1,0 +1,18 @@
+{
+  "name": "duo-dept-pipeline",
+  "version": "5.29.0",
+  "description": "Evidence-first commercial content validation and film-previsualization workflow.",
+  "author": {
+    "name": "Evidence-first Skills Contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "双部门内容与预演管线",
+    "shortDescription": "用证据闸门推进商业内容、动作因果、Blender预演与AI视频验证",
+    "longDescription": "把导演语义、可见执行、资产版权、付费生成和生产交接分开管理，并用单变量实验验证下游模型是否保留动作与空间。",
+    "developerName": "Evidence-first Skills Contributors",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用 $duo-dept-pipeline，把当前内容或电影预演任务推进到一个可见、可验收的下一结果。"
+  }
+}

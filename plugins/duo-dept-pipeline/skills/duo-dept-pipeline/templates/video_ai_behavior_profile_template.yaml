@@ -1,0 +1,68 @@
+Schema_Version: "1.1"
+Gate: "VIDEO_AI_BEHAVIOR_CALIBRATION"
+Model: "<MODEL_AND_VERSION>"
+Test_Date: "<YYYY-MM-DD>"
+Evidence_Level: "<A|B|C>"
+Paid_Generation_Authorized: false
+
+Atomic_Shot:
+  Scene_ID: "<SHOT_ID>"
+  Requested_Duration_Seconds: 0
+  Requested_Aspect_Ratio: "<W:H>"
+  Requested_Shot_Count: 1
+  Requested_Audio: "OFF"
+  Requested_Resolution: "<WIDTHxHEIGHT>"
+  Specs_Written_In_Prompt_First_Line: false
+  First_Frame: "<BOUND_IMAGE>"
+  Condition_Video: "<OPTIONAL_WHITE_CLAY_DRAFT>"
+  Condition_Video_Role: "NONE|PHYSICAL_DRAFT|STYLE_REFERENCE|OTHER"
+  Resolution: "<WIDTHxHEIGHT>"
+  Baseline_Prompt: "<PROMPT>"
+
+Output_Media_Verification:
+  Actual_Duration_Seconds: 0
+  Actual_Width: 0
+  Actual_Height: 0
+  Actual_FPS: 0
+  Actual_Frame_Count: 0
+  Container_Spec_Pass: false
+  Timing_Anchors:
+    - Target: "<0-Xs START_STATE>"
+      Actual: "UNTESTED"
+    - Target: "<X-Ys PRIMARY_ACTION>"
+      Actual: "UNTESTED"
+    - Target: "<Y-END RESULT_AND_HOLD>"
+      Actual: "UNTESTED"
+
+Behavior_Profile:
+  Identity_Adherence: "UNTESTED"
+  Character_Count_Adherence: "UNTESTED"
+  Motion_Literalness: "UNTESTED"
+  Attack_Target_Adherence: "UNTESTED"
+  Camera_Obedience: "UNTESTED"
+  Negative_Constraint_Sensitivity: "UNTESTED"
+  Reference_Image_Bias: "UNTESTED"
+  Temporal_Stability: "UNTESTED"
+  Automatic_Dramatization: "UNTESTED"
+  Output_Spec_Adherence: "UNTESTED"
+  Action_Timing_Adherence: "UNTESTED"
+  Draft_Motion_Preservation:
+    Contact_Timing: "UNTESTED"
+    Force_Direction: "UNTESTED"
+    Post_Contact_Displacement: "UNTESTED"
+    Occlusion_And_Penetration: "UNTESTED"
+    Identity_And_Count: "UNTESTED"
+
+Experiments:
+  - ID: "EXP-001"
+    Single_Changed_Signal: "<ONE_VARIABLE>"
+    Prompt_Delta: "<DELTA_ONLY>"
+    Result: "UNRUN"
+    Failure_Category: "NONE"
+    Cost: "UNKNOWN"
+    Evidence_Files: []
+
+Recommended_Patterns: []
+Forbidden_Patterns: []
+Known_Failure_Modes: []
+Production_Decision: "BLOCKED_UNTIL_DIRECTOR_SIGNOFF"

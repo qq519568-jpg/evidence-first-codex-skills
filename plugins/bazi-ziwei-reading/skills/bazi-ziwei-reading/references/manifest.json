@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "skill": {
+    "id": "bazi-ziwei-reading",
+    "version": "1.0.0-public",
+    "entrypoint": "SKILL.md",
+    "ui_metadata": "agents/openai.yaml"
+  },
+  "runtime": {
+    "setup": "scripts/setup_dependencies.ps1",
+    "python": {
+      "entrypoint": "scripts/calc_chart.py",
+      "windows_launcher": "scripts/run_calc.ps1",
+      "dependency": "lunar_python",
+      "version": "1.4.8",
+      "distribution": "installed locally into scripts/vendor"
+    },
+    "node": {
+      "entrypoint": "scripts/calc_ziwei.js",
+      "dependency": "iztro",
+      "version": "2.5.8",
+      "lockfile": "scripts/package-lock.json",
+      "distribution": "installed locally with npm ci"
+    }
+  },
+  "validation": {
+    "smoke_test": "tests/smoke_test.py",
+    "analysis_cli": "scripts/validate_analysis.py",
+    "privacy_redaction": "scripts/redact_chart.py"
+  },
+  "known_boundaries": [
+    "Only Gregorian civil input is accepted by calc_chart.py",
+    "Place and timezone are recorded but no solar-time or DST conversion is performed",
+    "Minute precision is preserved, but disputed true-solar-time and alternate day-boundary schools are not resolved",
+    "Five-element counts are unweighted stem plus branch-primary counts",
+    "Bazi strength, pattern, and useful-god conclusions remain human-audited traditional inferences rather than engine facts",
+    "Bazi flow years output deterministic structure only; event interpretation remains conditional",
+    "Ziwei annual palace and annual transformation data are NOT_COMPUTED",
+    "Narrative consistency is not independent evidence or scientific validation",
+    "Rule IDs provide traceability but do not prove a conclusion"
+  ],
+  "excluded_from_repository": [
+    "scripts/vendor/",
+    "scripts/node_modules/",
+    "generated outputs",
+    "real birth records",
+    "private evaluation results"
+  ]
+}

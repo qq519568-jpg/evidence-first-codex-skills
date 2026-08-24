@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "skill_budget": {
+    "warning_bytes": 8192,
+    "hard_max_bytes": 16384,
+    "hard_max_lines": 500
+  },
+  "references": [
+    { "path": "references/项目存储与交付物生命周期.md", "status": "runtime", "route": "项目交付/归档", "deploy": true },
+    { "path": "references/来源真值与镜头事件表.md", "status": "runtime", "route": "来源复刻", "deploy": true },
+    { "path": "references/导演颗粒度对齐闸门.md", "status": "runtime", "route": "多角色/遮挡", "deploy": true },
+    { "path": "references/立项难度闸门_甜品区禁区与替代方案.md", "status": "runtime", "route": "高风险/付费", "deploy": true },
+    { "path": "references/版权与来源闸门_资产准入标准.md", "status": "runtime", "route": "外部资产/采购", "deploy": true },
+    { "path": "references/导演可读白膜标准_语义预演验收.md", "status": "runtime", "route": "白膜/YAML", "deploy": true },
+    { "path": "references/开工自检卡_执行端一页纸.md", "status": "runtime", "route": "Blender执行", "deploy": true },
+    { "path": "references/执行端Blender5.2实战坑.md", "status": "runtime", "route": "Blender版本坑", "deploy": true },
+    { "path": "references/执行层代理与服务路由.md", "status": "runtime", "route": "DeepSeek/子代理/服务", "deploy": true },
+    { "path": "references/自动性能路由_模型与推理强度.md", "status": "runtime", "route": "模型/推理强度", "deploy": true },
+    { "path": "references/视频AI行为档案与单变量实验闸门.md", "status": "runtime", "route": "视频AI", "deploy": true },
+    { "path": "references/混元3D世界_导演生成交接.md", "status": "runtime", "route": "混元3D", "deploy": true },
+    { "path": "references/长期任务上下文与窗口交接.md", "status": "runtime", "route": "长期任务/新窗口", "deploy": true },
+    { "path": "references/经验沉淀_最小协议.md", "status": "runtime", "route": "新经验", "deploy": true }
+  ],
+  "retired": []
+}

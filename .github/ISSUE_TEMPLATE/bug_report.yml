@@ -1,0 +1,44 @@
+name: Skill behavior bug
+description: Report a reproducible skill-routing or workflow problem without personal data.
+title: "[skill] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Use synthetic inputs only. Do not post credentials, real birth data, private paths, chat exports, screenshots containing personal information, or signed URLs."
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      options:
+        - duo-dept-pipeline
+        - life-opportunity-radar
+        - bazi-ziwei-reading
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Synthetic reproduction
+      description: Provide the smallest synthetic prompt or input that reproduces the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I confirm this report contains only synthetic data and no secrets or private paths.
+          required: true

@@ -1,0 +1,44 @@
+{
+  "name": "evidence-first-skills",
+  "interface": {
+    "displayName": "Evidence-first Skills"
+  },
+  "plugins": [
+    {
+      "name": "duo-dept-pipeline",
+      "source": {
+        "source": "local",
+        "path": "./plugins/duo-dept-pipeline"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "life-opportunity-radar",
+      "source": {
+        "source": "local",
+        "path": "./plugins/life-opportunity-radar"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "bazi-ziwei-reading",
+      "source": {
+        "source": "local",
+        "path": "./plugins/bazi-ziwei-reading"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

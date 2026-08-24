@@ -1,0 +1,18 @@
+{
+  "name": "bazi-ziwei-reading",
+  "version": "1.0.0",
+  "description": "Script-calculated Bazi and Ziwei charts with explicit traditional-interpretation boundaries.",
+  "author": {
+    "name": "Evidence-first Skills Contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "八字与紫微排盘解读",
+    "shortDescription": "脚本排盘，区分盘面事实、传统推演、反证与现实建议",
+    "longDescription": "只在用户明确请求时运行确定性脚本排盘，并将传统文化解释、可核对规则、不确定性和现实决策边界分开呈现。",
+    "developerName": "Evidence-first Skills Contributors",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用 $bazi-ziwei-reading，只排算我明确要求的体系，并标注传统解释边界与不确定性。"
+  }
+}

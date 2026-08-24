@@ -1,0 +1,18 @@
+{
+  "name": "life-opportunity-radar",
+  "version": "1.0.0",
+  "description": "Current-source opportunity research with entry gates, falsifiers, and optional local fit profiles.",
+  "author": {
+    "name": "Evidence-first Skills Contributors"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "长期机会雷达",
+    "shortDescription": "从当前一手信号筛选可进入、可积累、可证伪的长期机会",
+    "longDescription": "区分行业热度与个人可进入路径，核验真实入口、复利资产、下行风险和能推翻结论的证据。个性化资料只保存在用户自己的本地配置中。",
+    "developerName": "Evidence-first Skills Contributors",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "使用 $life-opportunity-radar，把我接下来输入的内容当作线索，核验真正新增的长期机会或反证。"
+  }
+}

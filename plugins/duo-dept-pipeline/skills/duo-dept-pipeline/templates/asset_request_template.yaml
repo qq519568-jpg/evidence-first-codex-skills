@@ -1,0 +1,57 @@
+# 双部门 · 资产需求与版权准入卡 v1
+Schema_Version: "1.0"
+Request_ID: "AR_S01_001"
+Shot_IDs: ["S01_A"]
+Requested_By: "<director-or-upstream>"
+Purpose: "previs_and_rendered_video"
+
+Semantic_Lock:
+  Action_Result: "<一句话说明谁用什么对谁做什么及结果>"
+  Asset_Role: "character|prop|environment|animation|camera_light|vfx_proxy"
+  Shot_Scale: "wide|full|medium|close"
+  Screen_Occupancy_Percent: 35
+  Identity_Cues: ["<必须可见线索1>", "<线索2>", "<线索3>"]
+  Functional_Needs: ["rigged", "two_hand_grip", "single_contact"]
+  Minimum_Fidelity: "L2"
+  Acceptable_Substitutions: ["<可替代轮廓或风格>"]
+  Forbidden_Features: ["protected_franchise_copy", "abstract_blockout"]
+
+Library_Search:
+  Searched_Asset_IDs: []
+  Result: "MISSING|CANDIDATE_FOUND|APPROVED_FOUND"
+  Gap_Reason: "<为什么现有库不能满足>"
+
+External_Search:
+  Allowed: false                    # 仅在本地缺口确认后改为 true
+  Queries: []
+  Candidate_Source_URL: ""
+  Publisher_Author: ""
+  Asset_Title: ""
+  Accessed_Date: "YYYY-MM-DD"
+
+Copyright_Gate:
+  Rights_Class: "UNKNOWN|GREEN_SELF|GREEN_CC0|GREEN_CCBY|GREEN_COMMERCIAL|HOLD_LICENSE|REJECTED"
+  License_Code: ""
+  License_URL: ""
+  License_Evidence_File: ""
+  Commercial_Use: "unknown"
+  Derivatives_Allowed: "unknown"
+  Rendered_Output_Allowed: "unknown"
+  Attribution_Required: "unknown"
+  Attribution_Text: ""
+  Third_Party_IP_Clear: "unknown"
+  Trademark_Likeness_Clear: "unknown"
+  Publicity_Privacy_Clear: "unknown"
+  Source_SHA256: ""
+  Reviewer: ""
+  Decision_Date: ""
+  Decision: "HOLD_LICENSE"
+
+Intake:
+  Source_Package_ID: ""
+  Quarantine_Path: ""
+  Auto_Run_Disabled: true
+  Technical_Status: "NOT_STARTED"
+  Visual_Status: "NOT_STARTED"
+  Final_Asset_ID: ""
+  Final_Status: "NOT_APPROVED"

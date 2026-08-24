@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "project": "",
+  "updated_at": "",
+  "state": "NOT_EVALUATED",
+  "decision": {
+    "needs_new_3d_asset": null,
+    "semantic_lock": "NOT_LOCKED",
+    "reason": "",
+    "locked_beat_ids": [],
+    "existing_asset_search": "NOT_RUN",
+    "approved_existing_asset": "",
+    "copyright_decision": "HOLD"
+  },
+  "request": {
+    "asset_id": "",
+    "asset_role": "character|prop|environment|animation|conversion",
+    "quality_target": "previs|hero",
+    "edition": "auto",
+    "prompt": "",
+    "image_url": "",
+    "image_file": "",
+    "model": "3.1",
+    "generate_type": "Normal",
+    "result_format": "",
+    "enable_pbr": false,
+    "enable_geometry": false,
+    "face_count": null,
+    "polygon_type": "",
+    "output_dir": ""
+  },
+  "execution": {
+    "auto_submit_authorized": true,
+    "attempt_count": 0,
+    "retry_evidence": "",
+    "status": "NOT_SUBMITTED",
+    "job_id": "",
+    "request_id": "",
+    "client_state_file": "",
+    "result_credit_consumed": null,
+    "outputs": [],
+    "error": ""
+  },
+  "qa": {
+    "technical_status": "NOT_RUN",
+    "blender_intake": "NOT_RUN",
+    "director_status": "PENDING",
+    "notes": ""
+  }
+}

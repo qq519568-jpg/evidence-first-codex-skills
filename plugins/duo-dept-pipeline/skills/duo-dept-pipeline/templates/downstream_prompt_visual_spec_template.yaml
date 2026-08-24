@@ -1,0 +1,84 @@
+# 双部门 · 下游提示词工程视觉约束清单 v1
+Schema_Version: "1.0"
+Project_ID: "<project>"
+Shot_IDs: ["<shot>"]
+Color_Space: "sRGB"
+
+References:
+  - ID: "REF_CHARACTER_01"
+    File: "<人物参考图1>"
+    Roles: ["character_local_color", "character_surface"]
+    Must_Not_Control: ["camera", "action", "environment_color"]
+  - ID: "REF_ATMOSPHERE_02"
+    File: "<氛围参考图2>"
+    Roles: ["environment_color", "lighting_appearance", "atmosphere", "emotion"]
+    Must_Not_Control: ["character_identity_color", "geometry", "action"]
+
+Character_Palette:
+  Source: "REF_CHARACTER_01"
+  Colors:
+    - Role: "primary"
+      Hex: "#000000"
+      Name_CN: "<颜色名称>"
+      Usage: "<主装甲/服装>"
+      Coverage_Percent: 0
+      Lightness_Range: [0, 100]
+      Saturation_Range: [0, 100]
+      DeltaE_Tolerance: 8
+      Forbidden_Shifts: []
+
+Atmosphere_Palette:
+  Source: "REF_ATMOSPHERE_02"
+  Environment_Base: []
+  Lighting_Colors: []
+  Fog_Weather_Colors: []
+  Effect_Accents: []
+
+Measured_Look:
+  Tone:
+    Luma_P5: null
+    Luma_P50: null
+    Luma_P95: null
+    Highlight_Coverage_Percent: null
+    Shadow_Coverage_Percent: null
+  Atmosphere:
+    Haze_Coverage_Percent: null
+    Distant_Contrast_Falloff: "ESTIMATE"
+    Particle_Coverage_Percent: null
+    Bloom_Coverage_Percent: null
+  Surface_Perception:
+    Highlight_Size: "ESTIMATE"
+    Highlight_Intensity: "ESTIMATE"
+    Texture_Frequency: "ESTIMATE"
+    Wear_Wetness_Coverage: "ESTIMATE"
+  Image_Texture:
+    Sharpness: null
+    Grain_Strength: null
+    Grain_Size: null
+    Vignette_Strength: null
+    Motion_Blur_Length: null
+
+Human_Semantic_Axes_1_to_5:
+  Calm_to_Frenzied: {Score: null, Evidence: ""}
+  Safe_to_Oppressive: {Score: null, Evidence: ""}
+  Everyday_to_Solemn: {Score: null, Evidence: ""}
+  Clear_to_Polluted: {Score: null, Evidence: ""}
+  Restrained_to_Ornate: {Score: null, Evidence: ""}
+  Hopeful_to_Hopeless: {Score: null, Evidence: ""}
+  Documentary_to_Stylized: {Score: null, Evidence: ""}
+
+Control_Boundary:
+  Blender_Truth_Untouched: ["geometry", "action", "camera", "spatial_relations"]
+  Downstream_Targets: ["refined_first_frame", "video_redraw", "post_grade"]
+  Hex_Obedience_Claimed: false
+
+Deliverables:
+  - "character_palette.png"
+  - "atmosphere_palette.png"
+  - "downstream_prompt_visual_spec.yaml"
+  - "look_comparison.png"
+  - "look_qa.md"
+
+Director_Signoff:
+  Status: "NOT_REVIEWED"
+  Notes: ""

@@ -1,0 +1,145 @@
+# 双部门语义预演 · 场景合同 v4.1
+Schema_Version: "4.1"
+Scene_ID: "S01_A"
+Mode: "replicate"                    # replicate/adapt/original
+
+Source_Truth:
+  Version: "SOURCE_TRUTH_v1"
+  Source_File: "<path-or-asset-id>"
+  Source_Shot_ID: "SRC_S01"
+  Source_Timecode: "00:00.000-00:03.200"
+  Source_Frames: [0, 83]
+  Evidence_Frames: [0, 26, 52, 83]
+  Observed_Facts:
+    - "<只写画面可见事实>"
+  Interpretation:
+    - "<允许为空>"
+  Unknowns:
+    - "<看不清就写未知，不脑补>"
+  Forbidden_Inventions:
+    - "<来源没有且禁止生成的事件>"
+
+Output:
+  Duration_Seconds: 3.2
+  FPS: 26                            # 无默认；复刻任务先报告来源值
+  Canvas: "2340x1080@13:6"
+
+Asset_Preflight:
+  Request_Cards: ["asset_request_AR_S01_001.yaml"]
+  Local_Library_Searched: false     # 填写完成后才能改 true
+  External_Acquisition_Required: false
+  Copyright_Gate_Passed: false      # 每项资产证据通过后才能改 true
+  Manifest_Validation: "NOT_RUN"
+  Reject_Non_Approved_Assets: true
+
+Action_Intent: "hero 用战斧挡开 enemy，enemy 向右后方失衡；本段只有这一个结果"
+
+Physical_Causality_Contract:
+  Physical_Intent: "战斧格挡力从接触点传给 enemy，导致其连续向右后失衡"
+  Semantic_States:
+    - {ID: "K0", Time_Percent: 0, Visible_State: "双方未接触", Physical_State: "各自受力平衡", Must_Not_Show: ["受击反应", "武器穿插"]}
+    - {ID: "K1", Time_Percent: 25, Visible_State: "hero进入格挡路径", Physical_State: "武器向接触点加速", Must_Not_Show: ["enemy提前后仰"]}
+    - {ID: "K2", Time_Percent: 45, Visible_State: "斧柄与前臂形成唯一接触面", Physical_State: "接触力开始传递", Must_Not_Show: ["悬空受力", "主体熔合"]}
+    - {ID: "K3", Time_Percent: 65, Visible_State: "enemy重心移向右后", Physical_State: "力矩打破平衡", Must_Not_Show: ["瞬移", "方向反转"]}
+    - {ID: "K4", Time_Percent: 100, Visible_State: "enemy右后失衡并保持结果", Physical_State: "反应已发生且无新力源", Must_Not_Show: ["无原因复位"]}
+  Transitions:
+    - {From: "K0", To: "K1", Cause: "hero主动格挡", Origin: "hero手臂/战斧", Direction: "向接触点", Continuous_Change: "斧柄与前臂间距连续缩小", Should_Not_Jump: ["enemy反应"]}
+    - {From: "K1", To: "K2", Cause: "武器到达前臂", Origin: "axe_shaft_to_enemy_forearm", Direction: "向右后", Continuous_Change: "距离降为零后才开始受力", Should_Not_Jump: ["接触前变形"]}
+    - {From: "K2", To: "K3", Cause: "接触力传递", Origin: "enemy前臂", Direction: "右后", Continuous_Change: "前臂、肩、胸腔和骨盆依次响应", Should_Not_Jump: ["整人瞬移"]}
+    - {From: "K3", To: "K4", Cause: "重心移出支撑面", Origin: "enemy骨盆", Direction: "右后下", Continuous_Change: "失衡幅度连续增加后保持", Should_Not_Jump: ["无回弹原因的复位"]}
+  Causal_Constraints:
+    - {Before: "斧柄与前臂接触", After: "enemy受力失衡", Reason: "接触前不得出现结果"}
+
+Roles:
+  - ID: "hero"
+    Asset_ID: "CHAR_RIGGED_ARMORED_HERO_001"
+    Asset: "asset_lib://CHAR_RIGGED_ARMORED_HERO_001"
+    Asset_Status: "NOT_VERIFIED"   # 生产前必须为 APPROVED
+    Rights_Class: "UNKNOWN"
+    License_Code: "<verified-license-code>"
+    License_Evidence: "<path-to-source-evidence>"
+    Fidelity: "L2"
+    Identity_Cues: ["大肩甲", "背包", "长柄战斧"]
+    Start_Position: [0.0, 0.0, 0.0]
+    Facing_Vector: [0.0, 1.0, 0.0]
+    Held_Prop: {Type: "long_axe", Hand: "right", Grip: "two_hand_transition"}
+  - ID: "enemy"
+    Asset_ID: "CHAR_RIGGED_LEAN_ENEMY_001"
+    Asset: "asset_lib://CHAR_RIGGED_LEAN_ENEMY_001"
+    Asset_Status: "NOT_VERIFIED"   # 生产前必须为 APPROVED
+    Rights_Class: "UNKNOWN"
+    License_Code: "<verified-license-code>"
+    License_Evidence: "<path-to-source-evidence>"
+    Fidelity: "L2"
+    Identity_Cues: ["瘦长体型", "角状头部", "无背包"]
+    Start_Position: [0.8, 1.2, 0.0]
+    Facing_Vector: [0.0, -1.0, 0.0]
+
+Action:
+  Who: "hero"
+  Tool: "long_axe"
+  To: "enemy"
+  Phases:
+    Prepare:  {Frames: [1, 30], Pose: "<可执行位姿>"}
+    Contact:  {Frames: [31, 36], Contact_Point: "axe_shaft_to_enemy_forearm"}
+    Feedback: {Frames: [37, 83], Force_Vector: [0.7, 0.3, 0.1], Result: "enemy 右后失衡"}
+  Editorial_Hit_Stop: {Enabled: true, Frames: 4, Apply_In: "post"}
+
+Camera:
+  Type: "film_camera"
+  Lens_MM: 35
+  Sensor_Fit: "HORIZONTAL"
+  Start_Position: [0.0, -4.5, 1.5]
+  End_Position: [0.2, -4.2, 1.55]
+  Track_Target: [0.2, 0.5, 1.4]
+  Keyframes: [1, 83]
+  Cuts: []
+
+Scene_Functional_Geometry:
+  - {ID: "ground", Type: "plane", Affects: ["foot_contact"]}
+  - {ID: "foreground_rubble", Type: "occluder", Affects: ["composition", "occlusion"]}
+
+First_Frame_Isomorphism:
+  Refine_From: "review_frame_0001.png"
+  Position_Tolerance_Percent: 3
+  Scale_Tolerance_Percent: 3
+  Camera_Tolerance_Degrees: 2
+  Must_Match: ["canvas", "camera", "role_positions", "body_scale", "weapon", "occlusion"]
+  Reject_If_Using_Different_Composition: true
+
+Human_Semantic_QA:
+  Blind_Narration: "谁/武器/对象/动作/结果必须全部正确"
+  Silhouette: ["role_identity", "weapon_type", "facing", "force_direction"]
+  Keyframe_Triplet: ["prepare", "contact", "result"]
+  Source_Comparison: true
+  Director_Signoff_Required: true
+
+Technical_QA:
+  Checks:
+    - {Check: "media_spec", Expect: "matches Output"}
+    - {Check: "in_frame", Expect: "required subjects visible"}
+    - {Check: "penetration", Expect: "none except authored contact"}
+    - {Check: "ground_contact", Expect: "no floating"}
+    - {Check: "first_last_match_video", Expect: true}
+  Report_Disclaimer: "技术 QA 通过不代表内容或来源一致性通过"
+
+Deliverables:
+  - "review_semantic.mp4"
+  - "model_neutral.mp4"
+  - "keyframes_prepare_contact_result"
+  - "silhouette_check"
+  - "source_comparison_sheet"
+  - "technical_qa.json"
+  - "asset_compliance_report.csv"
+
+Downstream:
+  Target: "<model-and-mode>"
+  Primary_Control: "<one verified input>"
+  Capability_Evidence:
+    Video_Reference: {Grade: "A|B|C", Evidence: "<UI/doc/A-B test>"}
+    First_Frame: {Grade: "A|B|C", Evidence: "<UI/doc/A-B test>"}
+    Depth: {Grade: "A|B|C", Evidence: "<do not assume>"}
+    ColorMask: {Grade: "A|B|C", Evidence: "<do not assume>"}
+  Pilot_Duration_Seconds: 3.2
+  Post_Process: ["hit_stop", "speed_ramp", "exact_cut"]
+  Segment_Excludes: ["<本段禁止出现的后续内容>"]

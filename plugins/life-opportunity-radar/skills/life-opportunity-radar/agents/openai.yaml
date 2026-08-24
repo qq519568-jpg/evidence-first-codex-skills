@@ -1,0 +1,7 @@
+interface:
+  display_name: "长期机会雷达"
+  short_description: "核验可进入、可积累、可证伪的长期机会与新入口"
+  default_prompt: "使用 $life-opportunity-radar，把我接下来输入的内容当作线索，核验真正新增的长期机会或反证。"
+
+policy:
+  allow_implicit_invocation: true

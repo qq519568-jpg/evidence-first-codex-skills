@@ -1,0 +1,60 @@
+# 双部门 · 立项难度闸门 v1
+Schema_Version: "1.0"
+Project_ID: "<project>"
+Source_Truth_Version: "SOURCE_TRUTH_v1"
+Story_Understood: false
+Story_Summary: "<3-8句话或引用已确认概要>"
+
+Overall:
+  Difficulty: "UNKNOWN"             # SIMPLE/MEDIUM/HARD/EXTREME
+  Zone: "UNASSESSED"                # SWEET_SPOT/MANAGEABLE/DANGER/NO_GO
+  Recommendation: "STOP"            # GO/GO_WITH_CHANGES/PILOT_ONLY/CHANGE_SUBJECT
+  Decisive_Hardest_Shot: ""
+
+Risk_Scores_0_to_3:
+  Subject_Count_Continuity: 0
+  Action_Contact_Grip: 0
+  Occlusion_Spatial_Relations: 0
+  Face_Hands_Cloth_Softbody_Destruction: 0
+  Camera_LongTake_FirstFrame: 0
+  Asset_Gaps: 0
+  Downstream_Control: 0
+  Copyright_ThirdParty_Rights: 0
+  Evidence: []
+
+Shot_Assessments:
+  - Shot_ID: "SRC_S01"
+    Timecode: "00:00.000-00:03.000"
+    Zone: "UNASSESSED"
+    Blender_Difficulty: "UNKNOWN"
+    Main_Risks: []
+    Can_Decompose: true
+
+Costliest_Three:
+  - {Risk: "", Evidence: "", Responsible_Layer: "Blender|VideoAI|Post"}
+  - {Risk: "", Evidence: "", Responsible_Layer: "Blender|VideoAI|Post"}
+  - {Risk: "", Evidence: "", Responsible_Layer: "Blender|VideoAI|Post"}
+
+Control_Boundary:
+  Blender_Can_Lock: []
+  Video_AI_Remains_Probabilistic: []
+  Post_Can_Finish_Deterministically: []
+
+Options:
+  Maximum_Replication:
+    Cost: ""
+    Risk: ""
+    Pilot_Shot: ""
+  Reduced_Difficulty:
+    Preserve: []
+    Change: []
+    Expected_Zone_After_Change: ""
+  Change_Subject_Or_Form:
+    Proposal: []
+    Why_Better: ""
+
+Director_Gate:
+  Decision: "NOT_CONFIRMED"
+  Confirmed_By: ""
+  Confirmed_Date: ""
+  Blender_And_Downloads_Allowed: false

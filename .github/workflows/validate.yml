@@ -1,0 +1,17 @@
+name: Validate public skill repository
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate structure and privacy guards
+        shell: powershell
+        run: powershell -ExecutionPolicy Bypass -File scripts/validate_repository.ps1

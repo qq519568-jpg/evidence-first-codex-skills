@@ -1,0 +1,62 @@
+Schema_Version: "1.1"
+Gate: "DIRECTOR_GRANULARITY_ALIGNMENT"
+Scene_ID: "<SHOT_ID>"
+Status: "PENDING_DIRECTOR_CONFIRMATION"
+Source_Truth: "<SOURCE_TRUTH_VERSION>"
+Evidence_Frames: []
+
+Trigger_Reasons: []
+
+Roles:
+  - ID: "A01"
+    Source_Entity: "<EFRAME-ID>"
+    Side: "<SQUAD|ENEMY|UNKNOWN>"
+    Type: "<ROLE_TYPE>"
+    Identity_Cues: []
+    Visible_Frames: []
+    Weapon_Or_Prop: "UNKNOWN"
+    Continuity: []
+    Forbidden_Interpretations: []
+
+Props:
+  - ID: "P01"
+    Type: "<PROP_TYPE>"
+    Owner: "UNKNOWN"
+    Grip_Or_Contact: "UNKNOWN"
+
+Spatial_Model:
+  Coordinate_Type: "SCREEN_RELATIVE_PLUS_DEPTH_BANDS"
+  Metric_Top_View: "<ALLOWED_WITH_EVIDENCE|FORBIDDEN>"
+  Frame_States: []
+  Occlusion_Edges: []
+
+Motion_Model:
+  Character_Screen_Trajectories: []
+  Character_World_Trajectories: []
+  Character_Facing: []
+  Camera_Trajectory: []
+  Unseparated_Motion: []
+
+Director_Decisions: []
+Unknowns: []
+
+Execution_Handoff:
+  DeepSeek_Object_ID_Map: []
+  Visible_Progress_Fields: ["shot", "frame", "object_id", "current_action", "blocked_reason"]
+
+Video_AI_Behavior_Gate:
+  Model: "UNSELECTED"
+  Identity_Adherence: "UNTESTED"
+  Motion_Literalness: "UNTESTED"
+  Camera_Obedience: "UNTESTED"
+  Negative_Prompt_Sensitivity: "UNTESTED"
+  Reference_Bias: "UNTESTED"
+  Temporal_Stability: "UNTESTED"
+  Tested_Prompt_Patterns: []
+  Forbidden_Prompt_Patterns: []
+  Paid_Generation_Authorized: false
+
+Blender_Block:
+  Allowed: ["read_only_analysis", "technical_proxy_if_authorized"]
+  Forbidden: ["semantic_character_build", "final_animation", "production_signoff"]
+  Resume_When: ["director_alignment_signed"]

@@ -1,0 +1,286 @@
+{
+  "schema_version": "2.0",
+  "boundary": "本注册表只提供可追踪的内部传统推演契约，不证明规则具有科学有效性，也不替代人工审查结论是否由前提推出。",
+  "rule_contract": {
+    "required_fields": ["id", "domain", "level", "statement", "required_facts", "conditions", "disqualifiers", "forbidden_shortcuts", "source", "provenance", "status"],
+    "major_conclusion_requires": ["rule_id", "cited_facts", "conditions_met", "counterevidence", "uncertainty"]
+  },
+  "rules": [
+    {
+      "id": "BZ-OBS-001", "domain": "bazi", "level": "S",
+      "statement": "可以复述脚本已计算的四柱、日主、藏干、节气、起运或结构事实，但不得扩展为现实事件。",
+      "required_facts": ["八字.四柱", "八字.日主"],
+      "conditions": ["字段来自本次保存的 chart JSON"],
+      "disqualifiers": ["字段为 NOT_COMPUTED", "输入口径未确认"],
+      "forbidden_shortcuts": ["模型手排补齐", "把盘面事实写成真人经历"],
+      "source": "references/bazi-method.md#第1步定事实边界", "provenance": "internal_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-REL-001", "domain": "bazi", "level": "A",
+      "statement": "刑冲合害只证明组合存在；合化、吉凶、强弱及现实应验必须另列月令、通根、位置与制化条件。",
+      "required_facts": ["八字.刑冲合害", "八字.四柱"],
+      "conditions": ["明确涉及的两柱或三支"],
+      "disqualifiers": ["脚本未列出该关系", "把半合直接当化局"],
+      "forbidden_shortcuts": ["见冲必凶", "见合必吉", "见合即化"],
+      "source": "references/bazi-rules-ku.md#二规则分层与冲突裁决", "provenance": "internal_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-COUNT-001", "domain": "bazi", "level": "S",
+      "statement": "未加权五行计数只能描述表层数量，不能单独推出旺衰、财运、健康或用神。",
+      "required_facts": ["八字.五行统计"],
+      "conditions": ["只作数量复述"],
+      "disqualifiers": ["把藏干权重或月令强弱混入该字段"],
+      "forbidden_shortcuts": ["缺什么补什么", "数量最多即最旺", "数量最少即用神"],
+      "source": "SKILL.md#排算", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-STRENGTH-001", "domain": "bazi_strength", "level": "A",
+      "statement": "旺衰先列月令本气与日主的生克关系；月令是首要条件，但不能一票定强弱。",
+      "required_facts": ["八字.分析事实.月令", "八字.日主五行"],
+      "conditions": ["月柱已由节令确定", "出生时刻不在未决节令边界"],
+      "disqualifiers": ["日期或时区口径仍有歧义", "仅凭月份名称而非月支"],
+      "forbidden_shortcuts": ["得令即身强", "失令即身弱"],
+      "source": "references/bazi-method.md#第2步旺衰审计", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-STRENGTH-002", "domain": "bazi_strength", "level": "A",
+      "statement": "审查得地必须逐支列同五行藏干落点、是否本气以及是否受冲合；不得只写有根或无根。",
+      "required_facts": ["八字.分析事实.日主同五行藏干落点", "八字.刑冲合害"],
+      "conditions": ["藏干表完整"],
+      "disqualifiers": ["把印星当作日主同五行根", "忽略根所在支受冲合"],
+      "forbidden_shortcuts": ["有一根即强", "藏余气等同月令本气"],
+      "source": "references/bazi-method.md#第2步旺衰审计", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-STRENGTH-003", "domain": "bazi_strength", "level": "A",
+      "statement": "得势须分别列印比生扶、食伤泄秀、财星耗身、官杀制身的透干与藏干落点，再解释五档结论。",
+      "required_facts": ["八字.分析事实.十神作用分组"],
+      "conditions": ["十神均以本盘日主换算"],
+      "disqualifiers": ["跳过透藏差异", "把数量当成固定权重"],
+      "forbidden_shortcuts": ["机械加减分", "单看一个十神定全局"],
+      "source": "references/bazi-method.md#第2步旺衰审计", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-STRENGTH-004", "domain": "bazi_strength", "level": "A",
+      "statement": "五档旺衰结论必须附月令、根、透干生扶、泄耗克、冲合修正五项审计，并列至少一条反证。",
+      "required_facts": ["八字.四柱", "八字.分析事实", "八字.刑冲合害"],
+      "conditions": ["五项审计均有文字记录"],
+      "disqualifiers": ["关键项为 UNKNOWN", "变格嫌疑尚未裁决"],
+      "forbidden_shortcuts": ["只报强弱不报推导", "把不确定度写成命中概率"],
+      "source": "references/bazi-professional-report.md#二旺衰审计表", "provenance": "internal_quality_gate", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-PATTERN-PEIYIN-001", "domain": "bazi_pattern", "level": "B",
+      "statement": "伤官佩印仅在伤官有力、日主偏弱且印为用并能制伤或生身时成立；否则只能描述伤官与印并见。",
+      "required_facts": ["八字.四柱", "八字.分析事实.十神作用分组"],
+      "conditions": ["伤官有力", "日主偏弱", "印星为用且有力"],
+      "disqualifiers": ["身强印为忌", "印虚浮无根", "强弱未审计"],
+      "forbidden_shortcuts": ["伤官和印同盘即佩印", "用格局名代替条件审查"],
+      "source": "references/bazi-rules-ku.md#四经典成格范式以药制病为贵是成格不是病", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-PATTERN-SHAYIN-001", "domain": "bazi_pattern", "level": "B",
+      "statement": "杀印相生须同时见杀、印和可说明的杀生印、印生身路径，并审查身弱杀旺、印是否被破及路径是否受阻。",
+      "required_facts": ["八字.四柱", "八字.分析事实.十神作用分组", "八字.刑冲合害"],
+      "conditions": ["杀与印存在", "生化路径可定位", "印能承杀生身"],
+      "disqualifiers": ["身强印重", "印弱被制", "路径靠想象补全"],
+      "forbidden_shortcuts": ["杀印同见即成格", "直接推出权力或职位"],
+      "source": "references/bazi-rules-ku.md#四经典成格范式以药制病为贵是成格不是病", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-PATTERN-SHANGUAN-HESHA-001", "domain": "bazi_pattern", "level": "B",
+      "statement": "伤官合杀先确认伤官干、七杀干及五合关系，再审查距离、争合、月令与是否只合不化；成立性与作用方向分开写。",
+      "required_facts": ["八字.四柱", "八字.刑冲合害"],
+      "conditions": ["伤官与七杀均可定位", "脚本列出对应天干合"],
+      "disqualifiers": ["争合妒合未审查", "把相合直接写成化气"],
+      "forbidden_shortcuts": ["见伤官合杀即断贵", "隔柱之合与贴身之合同权"],
+      "source": "references/bazi-professional-report.md#三格局候选与否决表", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-FUYI-001", "domain": "bazi_yongshen", "level": "A",
+      "statement": "扶抑以已审计旺衰为前提：偏强才讨论泄耗制，偏弱才讨论生扶；中和不得强行取唯一用神。",
+      "required_facts": ["人工旺衰审计结论"],
+      "conditions": ["旺衰五档已裁决"],
+      "disqualifiers": ["旺衰为 UNKNOWN", "变格尚未排除"],
+      "forbidden_shortcuts": ["缺什么补什么", "按五行数量直接取用"],
+      "source": "references/bazi-rules-ku.md#七用神六维一致性检查取用前必做", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-GEJU-001", "domain": "bazi_yongshen", "level": "A",
+      "statement": "格局维度只讨论维护已通过条件审查的主线结构所需之神；候选格局未成立时不得反推用神。",
+      "required_facts": ["格局候选与否决表"],
+      "conditions": ["候选格局条件通过"],
+      "disqualifiers": ["仅因格局名好听而采纳", "破格条件未审查"],
+      "forbidden_shortcuts": ["先定用神再倒推格局"],
+      "source": "references/bazi-rules-ku.md#七用神六维一致性检查取用前必做", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-TIAOHOU-001", "domain": "bazi_yongshen", "level": "E",
+      "statement": "调候审查月令季节的寒暖燥湿；只有极端条件才可优先，且须标明流派并与扶抑结论分列。",
+      "required_facts": ["八字.分析事实.月令"],
+      "conditions": ["季节条件明确", "采用流派已声明"],
+      "disqualifiers": ["无极端寒暖燥湿依据", "把气候意象当医学结论"],
+      "forbidden_shortcuts": ["任何盘都调候为急", "调候字直接等于行业或健康"],
+      "source": "references/bazi-method.md#第5步六维取用与冲突裁决", "provenance": "internal_school_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-BINGYAO-001", "domain": "bazi_yongshen", "level": "B",
+      "statement": "病药须先命名可复核的结构病点，再说明候选之药如何制病；病型名称不自动决定全局喜忌。",
+      "required_facts": ["病型条件审查", "八字.四柱"],
+      "conditions": ["病与药均有盘面落点"],
+      "disqualifiers": ["病型条件不全", "药神无力或反成忌"],
+      "forbidden_shortcuts": ["套病名吓人", "以病型替代医学诊断"],
+      "source": "references/bazi-rules-ku.md#三经典病型速查命局之病c级判断", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-TONGGUAN-001", "domain": "bazi_yongshen", "level": "A",
+      "statement": "通关只在两股相克力量均有根有力且形成阻滞时启用，并说明通关五行在原局是否存在、有力或受制。",
+      "required_facts": ["八字.四柱", "八字.分析事实.十神作用分组"],
+      "conditions": ["相克两端均有力", "存在明确通关路径"],
+      "disqualifiers": ["一端虚浮", "不存在真实阻滞"],
+      "forbidden_shortcuts": ["凡相克必通关", "凭五行循环图自动取用"],
+      "source": "references/bazi-method.md#第5步六维取用与冲突裁决", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-BIANGE-001", "domain": "bazi_yongshen", "level": "A",
+      "statement": "变格默认 NORMAL；从势、专旺、化气须分别通过各自状态机，未通过不得翻转普通格局喜忌。",
+      "required_facts": ["变格判据清单", "八字.四柱", "八字.刑冲合害"],
+      "conditions": ["逐条记录候选状态通过与失败条件"],
+      "disqualifiers": ["日主仍有强根", "异类有根破纯", "化神条件不足"],
+      "forbidden_shortcuts": ["极弱即从", "一气偏多即专旺", "天干相合即化气"],
+      "source": "references/bazi-rules-ku.md#五变格四态状态机normalfromzhuanwanghuagqi", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-YONGSHEN-CONSENSUS-001", "domain": "bazi_yongshen", "level": "A",
+      "statement": "六维须逐维保留：同向才合并，冲突则写主路线、竞争路线、取舍理由与推翻条件。",
+      "required_facts": ["扶抑维度", "格局维度", "调候维度", "病药维度", "通关维度", "变格维度"],
+      "conditions": ["六维均有结论或明确 UNKNOWN"],
+      "disqualifiers": ["任何维度被静默跳过"],
+      "forbidden_shortcuts": ["多数投票冒充定论", "隐藏流派冲突"],
+      "source": "references/bazi-rules-ku.md#七用神六维一致性检查取用前必做", "provenance": "internal_quality_gate", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-LUCK-001", "domain": "bazi_luck", "level": "S",
+      "statement": "大运方向、起运时长、起运公历、虚岁与公历区间只引用脚本字段；起运时长年数不得误写成起运虚岁。",
+      "required_facts": ["八字.大运方向", "八字.起运", "八字.大运"],
+      "conditions": ["固定引擎返回字段完整"],
+      "disqualifiers": ["起运口径未声明", "把交运年份当整年无边界"],
+      "forbidden_shortcuts": ["getStartYear 直接命名虚岁", "自行心算交运日期"],
+      "source": "references/bazi-method.md#第8步大运节奏", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-FLOW-001", "domain": "bazi_flow", "level": "S",
+      "statement": "只有流年状态为 COMPUTED 时才引用目标年干支、大运归属及机械关系；这些字段不自动构成事件预测。",
+      "required_facts": ["八字.流年.状态", "八字.流年.结果"],
+      "conditions": ["目标年由 --flow-year 请求", "结果年份匹配"],
+      "disqualifiers": ["状态为 NOT_COMPUTED", "交运边界需日级而只有年级判断"],
+      "forbidden_shortcuts": ["模型手排流年", "单个冲合直接断事", "没有原局之象仍强写应期"],
+      "source": "references/bazi-method.md#第9步按需流年", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-FLOW-002", "domain": "bazi_flow", "level": "B",
+      "statement": "年度主题至少需要原局结构、大运作用、流年引动中的两类独立信号，并同时列反向因素和不确定度。",
+      "required_facts": ["原局主线", "八字.流年.结果.所在大运", "八字.流年.结果.作用关系"],
+      "conditions": ["至少两类独立信号", "先岁运后原局"],
+      "disqualifiers": ["只有一个冲合", "原局无对应主题", "用户未请求年度解释"],
+      "forbidden_shortcuts": ["把信号数写成概率", "岁运并临等于吉凶加倍", "预测具体灾祸日期"],
+      "source": "references/bazi-rules-ku.md#六岁运应期铁则", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-PILLAR-001", "domain": "bazi", "level": "C",
+      "statement": "柱位只可用于传统象征性讨论，不足以推出婚姻、性格、家庭或事件的确定结论。",
+      "required_facts": ["八字.四柱"],
+      "conditions": ["同时有十神与结构依据"],
+      "disqualifiers": ["只有柱位标签"],
+      "forbidden_shortcuts": ["日支即真实配偶画像", "月柱冲即真实家庭事件"],
+      "source": "references/bazi-method.md#第7步现实主题翻译", "provenance": "internal_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "BZ-NOT-COMPUTED-001", "domain": "bazi", "level": "S",
+      "statement": "脚本未输出的神煞、流年、强弱、格局或用神变量必须标记 NOT_COMPUTED 或 UNKNOWN。",
+      "required_facts": ["本次 chart JSON"],
+      "conditions": ["先搜索对应字段"],
+      "disqualifiers": ["字段确已计算"],
+      "forbidden_shortcuts": ["依靠常识补字段", "把人工推演标成排盘事实"],
+      "source": "SKILL.md#排算", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-MINGSHEN-001", "domain": "ziwei_structure", "level": "A",
+      "statement": "命宫主星组合与身宫实际落宫须合看，只能形成传统行为机制候选；身宫在迁移不等于必须离乡，身宫在官禄不等于事业决定全部人生。",
+      "required_facts": ["紫微.命宫", "紫微.身宫", "紫微.十二宫"],
+      "conditions": ["命宫地支对应宫位已定位", "身宫地支对应宫位已定位", "主星组合与辅煞原值完整"],
+      "disqualifiers": ["身宫只见地支但未定位宫名", "命宫或身宫字段缺失"],
+      "forbidden_shortcuts": ["身宫迁移即移民", "身宫官禄即事业就是人生", "组合名直接当人格事实"],
+      "source": "references/ziwei-method.md#第1步定命身主线", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-SANFANG-001", "domain": "ziwei_structure", "level": "A",
+      "statement": "命宫三方四正必须同时核对命、财帛、官禄、迁移四宫的主星组合、亮度、四化与重要辅煞，才可讨论能力、责任、资源交换和外部场域的联动。",
+      "required_facts": ["紫微.命宫", "紫微.十二宫.命宫", "紫微.十二宫.财帛", "紫微.十二宫.官禄", "紫微.十二宫.迁移"],
+      "conditions": ["四宫均可从本次 JSON 定位", "完整列出参与星曜"],
+      "disqualifiers": ["任一重点宫位缺失", "只摘一颗星曜"],
+      "forbidden_shortcuts": ["由单宫评定人生层次", "由单星列固定职业", "禄权科会照即成功保证"],
+      "source": "references/ziwei-professional-report.md#三命财官迁审计表", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-SIHUA-001", "domain": "ziwei_structure", "level": "A",
+      "statement": "生年四化只作为星曜与宫位作用方向的修正，须同时引用星曜、四化、落宫、亮度和同宫条件；不得直接等同真实财富、权力、名声或灾祸。",
+      "required_facts": ["紫微.生年四化", "紫微.十二宫.主星.四化", "紫微.十二宫.主星.亮度"],
+      "conditions": ["四化星曜与落宫可交叉核对"],
+      "disqualifiers": ["四化文字与宫位主星不一致", "亮度或落宫缺失"],
+      "forbidden_shortcuts": ["化禄必发财", "化权必掌权", "化科必成名", "化忌必有灾"],
+      "source": "references/ziwei-professional-report.md#四四化写法", "provenance": "internal_traditional_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-BRIGHTNESS-001", "domain": "ziwei", "level": "S",
+      "statement": "星曜亮度必须引用引擎原值，只作传统表达修正而非固定吉凶分数；不熟悉的缩写原样保留。",
+      "required_facts": ["紫微.十二宫.主星.亮度"],
+      "conditions": ["值来自本次 JSON"],
+      "disqualifiers": ["亮度为空或引擎版本未知"],
+      "forbidden_shortcuts": ["自行补全亮度含义", "庙旺等于现实成功", "落陷等于现实失败"],
+      "source": "references/ziwei-method.md#二推演要点防错清单", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-EMPTY-001", "domain": "ziwei_structure", "level": "E",
+      "statement": "宫位无主星时，借对宫属于传统流派推演；必须点名对宫和借入星曜，明确不是本宫直接坐守，并提高不确定度。",
+      "required_facts": ["紫微.十二宫"],
+      "conditions": ["目标宫主星数组为空", "对宫可准确定位"],
+      "disqualifiers": ["目标宫实际有主星", "对宫关系未核对"],
+      "forbidden_shortcuts": ["把借星写成本宫坐守", "空宫等于没有该主题", "借宫推出具体配偶或事件"],
+      "source": "references/ziwei-professional-report.md#一双层交付", "provenance": "internal_school_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-THEME-001", "domain": "ziwei_translation", "level": "C",
+      "statement": "事业、财务、关系或压力主题至少连接两项独立盘面事实，并列反证、现实核验和不确定度；宫名与星曜不构成真人经历。",
+      "required_facts": ["至少两个已核对宫位或四化事实"],
+      "conditions": ["主题事实来自本次 JSON", "存在可否证核验问题"],
+      "disqualifiers": ["只有单星或单宫标签", "用户经历被反向写入且未标信息污染"],
+      "forbidden_shortcuts": ["宫名直接当事件", "万能性格话", "已知经历包装成盲测命中"],
+      "source": "references/ziwei-client-voice.md#二后文怎样证明", "provenance": "internal_quality_gate", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-PALACE-001", "domain": "ziwei", "level": "C",
+      "statement": "已核对宫位与星曜后，只能作传统象征性叙述，不得写成真人事实。",
+      "required_facts": ["紫微.十二宫"], "conditions": ["字段来自本次 JSON"], "disqualifiers": ["宫位或星曜缺失"], "forbidden_shortcuts": ["星曜名称直接断真实事件"],
+      "source": "references/ziwei-method.md#三方四正与重点宫位", "provenance": "internal_formalization", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-DECADE-001", "domain": "ziwei", "level": "S",
+      "statement": "可引用已计算的大限区间与当值宫位；未计算的年度结构不得补全。",
+      "required_facts": ["紫微.十二宫.大限"], "conditions": ["大限字段完整"], "disqualifiers": ["目标年流年宫位未计算"], "forbidden_shortcuts": ["从大限手排流年四化"],
+      "source": "references/ziwei-method.md#第5步大限与流年边界", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "ZW-NOT-COMPUTED-001", "domain": "ziwei", "level": "S",
+      "statement": "紫微流年宫位或流年四化没有确定性输出时必须标记 NOT_COMPUTED。",
+      "required_facts": ["紫微._meta.流年数据"], "conditions": ["检查元数据状态"], "disqualifiers": ["已有受控计算结果"], "forbidden_shortcuts": ["模型补排紫微流年"],
+      "source": "references/ziwei-method.md#第5步大限与流年边界", "provenance": "internal_safety_constraint", "status": "REVIEWED_FOR_SCOPE"
+    },
+    {
+      "id": "CROSS-NARRATIVE-001", "domain": "cross", "level": "A",
+      "statement": "双盘对照只比较当前文本的叙述一致性；共享出生输入和解释模型，不构成独立证据。",
+      "required_facts": ["八字分析", "紫微分析"], "conditions": ["用户明确要求双盘对照"], "disqualifiers": ["任一盘未计算"], "forbidden_shortcuts": ["一致即提高准确率", "用双盘验证出生时辰"],
+      "source": "references/cross-validate.md", "provenance": "internal_epistemic_constraint", "status": "REVIEWED_FOR_SCOPE"
+    }
+  ]
+}

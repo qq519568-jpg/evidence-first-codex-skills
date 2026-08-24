@@ -1,0 +1,7 @@
+interface:
+  display_name: "八字与紫微排盘解读"
+  short_description: "八字紫微脚本排盘，先口头总断，再以规则与反证证明"
+  default_prompt: "Use $bazi-ziwei-reading to calculate only the requested system, lead with its client-friendly spoken overview, then provide evidence-linked traditional interpretation and counterevidence."
+
+policy:
+  allow_implicit_invocation: true
